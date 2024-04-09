@@ -1,0 +1,33 @@
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #A4E5C6;
+}
+
+.logo {
+  
+  display: flex;
+  align-items: center;
+  gap: 2.5  px;
+  
+}
+
+.logo span {
+  font-size: 26px;
+  font-weight: bold;
+  color:#865858;
+}
+
+.checklist {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 auto; /* Centraliza horizontalmente */
+  color: #000000;
+}
+
+.icon {
+  color: blue; /* Exemplo de cor personalizada para o ícone */
+  font-size: 24px; /* Exemplo de tamanho personalizado para o ícone */
+}
