@@ -1,9 +1,11 @@
 .section-header {
+  margin: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
   background-color: #A4E5C6;
+  border-radius: 20px;
 }
 
 .logo {
@@ -28,6 +30,6 @@
 }
 
 .icon {
-  color: blue; /* Exemplo de cor personalizada para o ícone */
+  color: rgb(52, 52, 240); /* Exemplo de cor personalizada para o ícone */
   font-size: 24px; /* Exemplo de tamanho personalizado para o ícone */
 }

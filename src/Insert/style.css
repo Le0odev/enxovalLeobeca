@@ -1,0 +1,119 @@
+
+.checklist-container {
+    margin: 1rem;
+    gap: 
+    50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #A4E5C6;
+    border-radius: 20px;
+  }
+  
+  .form-container {
+    width: 100%;
+    max-width: 300px;
+    
+  }
+  
+  .items-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .section {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin: 10px;
+    background-color: #D9D9D9;
+  }
+  
+  .item-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    background-color: #e5131300;
+  }
+  
+  .item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .delete-icon {
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  /* Estilos do formulário */
+  form {
+    
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  label {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+    input,
+    select {
+        font-size: 1rem;
+        padding: 8px;
+        border: 1px solid #D9D9D9;
+        border-radius: 9px;
+        
+        
+    }
+  
+  .add-button {
+
+    padding: 12px 24px;
+    background-color: rgb(52, 52, 240);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    
+  }
+
+  .item {
+    
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 1px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .item span {
+    margin-left: 10px;
+  }
+  
+   
+  
+  .add-button:hover {
+    background-color: #505050;
+  }
+
+  .delete-icon:hover{
+    color: red; /* Altere a cor ou adicione outros estilos conforme necessário */
+    cursor: pointer; /* Altere o cursor para indicar que é clicável */
+
+  }
+
+  .check-box {
+    opacity: 0.7; /* Altere a opacidade ou adicione outros estilos conforme necessário */
+    cursor: pointer; /* Altere o cursor para indicar que é clicável */
+  }
