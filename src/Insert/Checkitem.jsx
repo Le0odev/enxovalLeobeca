@@ -3,7 +3,7 @@ import { FaTrash } from 'react-icons/fa';
 import '../Insert/style.css';
 
 const Checklist = () => {
-  const sections = ['Seções', 'cozinha', 'quarto', 'banheiro', 'escritorio', 'area-de-servico', 'sala', 'viagens/planos', 'pets', "mesa/Banho" ];
+  const sections = ['Seções', 'cozinha', 'quarto', 'banheiro', 'escritorio', 'area-de-servico', 'sala', 'viagens/planos', 'pets', "mesa/banho"];
 
   const [text, setText] = useState('');
   const [color, setColor] = useState('');
@@ -22,7 +22,8 @@ const Checklist = () => {
   };
 
   const handleColorChange = (e) => {
-    setColor(e.target.value);
+    const selectedValue = e.target.value;
+    setColor(selectedValue);
   };
 
   const handleSectionChange = (e) => {
@@ -52,27 +53,24 @@ const Checklist = () => {
     const updatedItems = items.filter(item => item !== itemToDelete);
     setItems(updatedItems);
   };
-  
-  
 
   return (
     <div className='checklist-container'>
+      <h1>NOSSO ENXOVAL</h1>
       <div className='form-container'>
         <form onSubmit={handleSubmit}>
           <label>
-           
             <input type="text" placeholder='Insira um item' value={text} onChange={handleTextChange} />
           </label>
           <label>
-           
             <select value={color} onChange={handleColorChange}>
-              <option value="red">Vermelho</option>
-              <option value="green">Verde</option>
-              <option value="blue">Azul</option>
+              <option value="">Selecione uma cor</option>
+              <option value="#111111">Preto</option>
+              <option value="#b81414">Vermelho</option>
+              <option value="#808080">Inox</option>
             </select>
           </label>
           <label>
-          
             <select placeholder='insira uma cor' value={section} onChange={handleSectionChange}>
               {sections.map((sec, index) => (
                 <option key={index} value={sec}>{sec.charAt(0).toUpperCase() + sec.slice(1)}</option>
@@ -92,12 +90,19 @@ const Checklist = () => {
               <div className='item-list'>
                 {filteredItems.map((item, itemIndex) => (
                   <div key={itemIndex} className='item'>
-                            <input className='check-box'
-            type="checkbox"
-            checked={item.completed}
-            onChange={() => handleCheckboxChange(item)}
-          />
+                    <input className='check-box'
+                      type="checkbox"
+                      checked={item.completed}
+                      onChange={() => handleCheckboxChange(item)}
+                    />
                     <span>{item.text}</span>
+                    {item.color && (
+                      <div
+                        className='color-indicator'
+                        style={{ backgroundColor: item.color }}
+                        title='Cor selecionada'
+                      ></div>
+                    )}
                     <FaTrash className='delete-icon' onClick={() => handleDeleteItem(item)} />
                   </div>
                 ))}

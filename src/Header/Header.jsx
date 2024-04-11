@@ -9,9 +9,7 @@ export const Header = () => {
       <FaCheckSquare className='icon' />
       <span>LEOBECA</span>
     </div>
-    <div class="checklist">
-      ENXOVAL CHECKLIST
-    </div>
+    
   </section>
   
 
