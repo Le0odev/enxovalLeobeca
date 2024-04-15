@@ -6,14 +6,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 50px;
   background-color: #A4E5C6; /* Nova cor de fundo */
-  border-radius: 20px;
+  border-radius: 10px;
+  
 }
 
+
+
+
 .checklist-container h1 {
-  color: #f67280;;
+  padding: 10px;
+  border: 1px solid #333; /* Adicionando uma borda sólida com 2px de largura */
+  border-radius: 10px; /* Aqui está o raio da borda */
+  color: #f67280;
 }
+
 
 .form-container {
  
@@ -50,7 +58,7 @@
 
 .item-list {
   
-  margin: 20px;
+  margin: 12px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1rem;
@@ -58,33 +66,35 @@
 }
 
 .item {
-  font-family: Roboto;
-  font-size: 1.1rem;
+  font-family:Arial, Helvetica, sans-serif;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   background-color: #cecece; /* Cor de fundo padrão */
   border: 2px solid transparent; /* Borda transparente por padrão */
-  border-radius: 9px;
-  padding: 12px;
+  border-radius: 8px;
+  padding: 10px;
   position: relative; /* Permite posicionar o indicador de cor */
 }
 
 .item .color-indicator {
-  width: 18px;
-  height: 18px;
+  width: 15px;
+  height: 15px;
   margin-left: 8px;
   border-radius: 50%;
   position: absolute;
-  left: -22px; /* Posição à esquerda do item */
+  left: +120px; /* Posição à esquerda do item */
   top: 50%; /* Alinhamento verticalmente */
   transform: translateY(-50%);
 }
 
 .item:hover .color-indicator {
   display: block; /* Mostra o indicador de cor no hover */
+  border: 2px red;
 }
 
 .color-indicator {
+  border: 2px red;
   display: none; /* Oculta o indicador de cor por padrão */
 }
 
@@ -93,7 +103,7 @@
 .item:hover {
   transform: translateY(-5px); /* Efeito de levantamento ao passar o mouse */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada */
-
+  
   
 }
 
@@ -136,16 +146,29 @@ select {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .add-button:hover {
-  background-color: #355c7d; /* Cor de fundo ao passar o mouse */
+  background-color:#f67280;/* Cor de fundo ao passar o mouse */
+  transform: translateY(-5px);
 }
 
 .delete-icon:hover {
   color: red;
   cursor: pointer;
 }
+
+.edit-icon{
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.edit-icon:hover {
+  color:#55277d;
+  cursor: pointer;
+}
+
 
 .check-box {
   
@@ -170,4 +193,47 @@ input[type="checkbox"] {
   margin-left: 20px;
   border: 1px solid #ccc;
   border-radius: 2px;
+  
 } 
+
+.checklist-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.playlist-button {
+  margin-left: 40px;
+  padding: 16px;
+  background-color: #333;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px; /* Aqui está o raio da borda */
+  transition: background-color 0.3s ease; /* Adicionando transição para suavizar a mudança de cor */
+}
+
+.playlist-button:hover {
+  background-color:#f67280; /* Mudando a cor de fundo ao passar o mouse sobre o botão */
+  transform: translateY(-5px);
+}
+
+
+.playlistt{
+
+  display: inline-block;
+  vertical-align: top;
+}
+.playlist-container {
+  display: inline-block;
+  width: 450px; /* Defina a largura desejada aqui */
+  vertical-align: top;
+}
+
+
+/* Estilos adicionais conforme necessário */

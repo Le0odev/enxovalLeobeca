@@ -1,0 +1,19 @@
+
+  
+ 
+  .footer p {
+    margin: 0;
+    font-size: 14px;
+  }
+  .footer {
+    margin-inline-end: 1rem;
+    margin-inline-start: 1rem;
+    background-color: c;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    border-radius: 10px;
+   
+    
+  }
+    

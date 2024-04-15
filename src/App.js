@@ -7,10 +7,12 @@ import { Footer } from './footer/Footer';
 
 
 
+
 function App() {
   return (
     <div className="Header">
       <Header />
+      
       <Checkitem />
       <Footer />
     </div>

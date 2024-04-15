@@ -6,7 +6,7 @@
   align-items: center;
   padding: 20px;
   background-color: #A4E5C6; /* Cor de fundo */
-  border-radius: 20px;
+  border-radius: 10px;
 }
 
 .logo {
@@ -31,3 +31,4 @@
   color: #f67280; /* Cor do ícone */
   font-size: 34px;
 }
+

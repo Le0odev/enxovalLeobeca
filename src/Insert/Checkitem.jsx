@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { FaTrash } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { FaTrash, FaEdit } from 'react-icons/fa';
 import '../Insert/style.css';
 
 const Checklist = () => {
@@ -12,10 +12,8 @@ const Checklist = () => {
     const savedItems = localStorage.getItem('checklistItems');
     return savedItems ? JSON.parse(savedItems) : [];
   });
-
-  useEffect(() => {
-    localStorage.setItem('checklistItems', JSON.stringify(items));
-  }, [items]);
+  const [editItem, setEditItem] = useState(null);
+  const [showPlaylist, setShowPlaylist] = useState(false);
 
   const handleTextChange = (e) => {
     setText(e.target.value);
@@ -32,8 +30,19 @@ const Checklist = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newItem = { text, color, section, completed: false };
-    setItems([...items, newItem]);
+    if (editItem) {
+      const updatedItems = items.map(item => {
+        if (item === editItem) {
+          return { ...item, text, color, section };
+        }
+        return item;
+      });
+      setItems(updatedItems);
+      setEditItem(null);
+    } else {
+      const newItem = { text, color, section, completed: false };
+      setItems([...items, newItem]);
+    }
     setText('');
     setColor('');
     setSection('');
@@ -54,9 +63,34 @@ const Checklist = () => {
     setItems(updatedItems);
   };
 
+  const handleEditItem = (itemToEdit) => {
+    setEditItem(itemToEdit);
+    setText(itemToEdit.text);
+    setColor(itemToEdit.color);
+    setSection(itemToEdit.section);
+  };
+
   return (
     <div className='checklist-container'>
-      <h1>NOSSO ENXOVAL</h1>
+      <div className="header">
+        <h1>NOSSO ENXOVAL</h1>
+        <button className='playlist-button' onClick={() => setShowPlaylist(!showPlaylist)}>Mostrar/Esconder Playlist</button>
+      </div>
+
+      {showPlaylist && (
+        <div className="playlist-container">
+          <iframe className='playlistt'
+            src="https://open.spotify.com/embed/playlist/7djtxycZOZbOs1Y68FNZJj?utm_source=generator&theme=0"
+            width="100%"
+            height="160"
+            frameBorder="0"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            allowFullScreen
+            loading="lazy"
+          ></iframe>
+        </div>
+      )}
+
       <div className='form-container'>
         <form onSubmit={handleSubmit}>
           <label>
@@ -71,13 +105,13 @@ const Checklist = () => {
             </select>
           </label>
           <label>
-            <select placeholder='insira uma cor' value={section} onChange={handleSectionChange}>
+            <select placeholder='Selecione uma seção' value={section} onChange={handleSectionChange}>
               {sections.map((sec, index) => (
                 <option key={index} value={sec}>{sec.charAt(0).toUpperCase() + sec.slice(1)}</option>
               ))}
             </select>
           </label>
-          <button className='add-button' type="submit">Adicionar Item</button>
+          <button className='add-button' type="submit">{editItem ? 'Atualizar' : 'Adicionar Item'}</button>
         </form>
       </div>
 
@@ -104,6 +138,7 @@ const Checklist = () => {
                       ></div>
                     )}
                     <FaTrash className='delete-icon' onClick={() => handleDeleteItem(item)} />
+                    <FaEdit className='edit-icon' onClick={() => handleEditItem(item)} />
                   </div>
                 ))}
               </div>
