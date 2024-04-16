@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/enxovalLeobeca/static/css/main.4bbdc627.css",
+    "main.css": "/enxovalLeobeca/static/css/main.355dfbdf.css",
     "main.js": "/enxovalLeobeca/static/js/main.b628bad3.js",
     "static/js/453.e9e91e50.chunk.js": "/enxovalLeobeca/static/js/453.e9e91e50.chunk.js",
     "index.html": "/enxovalLeobeca/index.html",
-    "main.4bbdc627.css.map": "/enxovalLeobeca/static/css/main.4bbdc627.css.map",
+    "main.355dfbdf.css.map": "/enxovalLeobeca/static/css/main.355dfbdf.css.map",
     "main.b628bad3.js.map": "/enxovalLeobeca/static/js/main.b628bad3.js.map",
     "453.e9e91e50.chunk.js.map": "/enxovalLeobeca/static/js/453.e9e91e50.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4bbdc627.css",
+    "static/css/main.355dfbdf.css",
     "static/js/main.b628bad3.js"
   ]
 }
