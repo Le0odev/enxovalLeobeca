@@ -47,7 +47,7 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   margin: 10px;
-  background-color: #6c5b7b; /* Cor de fundo */
+  background-color: #e29a9f; /* Cor de fundo */
 }
 
 .section h2{
@@ -62,7 +62,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1rem;
-  background-color: #6c5b7b; /* Cor de fundo */
+  background-color: #e29a9f; /* Cor de fundo */
 }
 
 .item {
@@ -70,7 +70,7 @@
   font-size: 1rem;
   display: flex;
   align-items: center;
-  background-color: #cecece; /* Cor de fundo padrão */
+  background-color: #cfcfcf; /* Cor de fundo padrão */
   border: 2px solid transparent; /* Borda transparente por padrão */
   border-radius: 8px;
   padding: 10px;
@@ -141,7 +141,7 @@ select {
 
 .add-button {
   padding: 12px 24px;
-  background-color: #6c5b7b; /* Cor de fundo */
+  background-color: #e29a9f; /* Cor de fundo */
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -150,7 +150,7 @@ select {
 }
 
 .add-button:hover {
-  background-color:#f67280;/* Cor de fundo ao passar o mouse */
+  background-color:#333;/* Cor de fundo ao passar o mouse */
   transform: translateY(-5px);
 }
 
