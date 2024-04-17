@@ -1,6 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { FaTrash, FaEdit } from 'react-icons/fa';
+import firebase from 'firebase/compat/app'; // Importe o módulo do Firebase compatível
+import 'firebase/compat/database'; // Importe o módulo do Realtime Database compatívelporte o módulo do Realtime Database
 import '../Insert/style.css';
+
+// Configurações do Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyCZI40cOWEVO5XiVYXFQiroBKhCMRLsz1o",
+  authDomain: "leobeca-ad5b8.firebaseapp.com",
+  databaseURL: "https://leobeca-ad5b8-default-rtdb.firebaseio.com",
+  projectId: "leobeca-ad5b8",
+  storageBucket: "leobeca-ad5b8.appspot.com",
+  messagingSenderId: "627592096174",
+  appId: "1:627592096174:web:39ce5fb194335a5d04003f",
+  measurementId: "G-SV8EZL65FY"
+};
+
+// Inicialize o Firebase
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+
+const database = firebase.database(); // Obtém a referência para o Realtime Database
 
 const Checklist = () => {
   const sections = ['Seções', 'cozinha', 'quarto', 'banheiro', 'escritorio', 'area-de-servico', 'sala', 'viagens/planos', 'pets', "mesa/banho"];
@@ -8,16 +29,27 @@ const Checklist = () => {
   const [text, setText] = useState('');
   const [color, setColor] = useState('');
   const [section, setSection] = useState('');
-  const [items, setItems] = useState(() => {
-    const savedItems = localStorage.getItem('checklistItems');
-    return savedItems ? JSON.parse(savedItems) : [];
-  });
+  const [items, setItems] = useState([]);
   const [editItem, setEditItem] = useState(null);
   const [showPlaylist, setShowPlaylist] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('checklistItems', JSON.stringify(items));
-  }, [items]);
+    const itemsRef = database.ref('checklistItems');
+
+    itemsRef.on('value', (snapshot) => {
+      const itemsData = snapshot.val();
+      if (itemsData) {
+        const itemsArray = Object.entries(itemsData).map(([key, value]) => ({ id: key, ...value }));
+        setItems(itemsArray);
+      } else {
+        setItems([]);
+      }
+    });
+
+    return () => {
+      itemsRef.off(); // Desinscreva-se dos eventos ao sair do componente
+    };
+  }, []);
 
   const handleTextChange = (e) => {
     setText(e.target.value);
@@ -35,17 +67,19 @@ const Checklist = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (editItem !== null) {
-      const updatedItems = items.map(item => {
-        if (item === editItem) {
-          return { ...item, text, color, section };
-        }
-        return item;
+      database.ref(`checklistItems/${editItem.id}`).update({
+        text,
+        color,
+        section
       });
-      setItems(updatedItems);
       setEditItem(null);
     } else {
-      const newItem = { text, color, section, completed: false };
-      setItems([...items, newItem]);
+      database.ref('checklistItems').push({
+        text,
+        color,
+        section,
+        completed: false
+      });
     }
     setText('');
     setColor('');
@@ -53,18 +87,13 @@ const Checklist = () => {
   };
 
   const handleCheckboxChange = (itemToToggle) => {
-    const updatedItems = items.map(item => {
-      if (item === itemToToggle) {
-        return { ...item, completed: !item.completed };
-      }
-      return item;
+    database.ref(`checklistItems/${itemToToggle.id}`).update({
+      completed: !itemToToggle.completed
     });
-    setItems(updatedItems);
   };
 
   const handleDeleteItem = (itemToDelete) => {
-    const updatedItems = items.filter(item => item !== itemToDelete);
-    setItems(updatedItems);
+    database.ref(`checklistItems/${itemToDelete.id}`).remove();
   };
 
   const handleEditItem = (itemToEdit) => {
@@ -73,6 +102,7 @@ const Checklist = () => {
     setColor(itemToEdit.color);
     setSection(itemToEdit.section);
   };
+
 
   return (
     <div className='checklist-container'>
