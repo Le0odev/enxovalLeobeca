@@ -6,8 +6,8 @@ import { FaCheckSquare } from "react-icons/fa";
 
 export const Header = () => {
   return (
-    <section class="section-header">
-    <div class="logo">
+    <section className="section-header">
+    <div className="logo">
       <FaCheckSquare className='icon' />
       <span>LEOBECA</span>
       

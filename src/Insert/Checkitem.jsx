@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import '../Insert/style.css';
 
@@ -15,6 +15,10 @@ const Checklist = () => {
   const [editItem, setEditItem] = useState(null);
   const [showPlaylist, setShowPlaylist] = useState(false);
 
+  useEffect(() => {
+    localStorage.setItem('checklistItems', JSON.stringify(items));
+  }, [items]);
+
   const handleTextChange = (e) => {
     setText(e.target.value);
   };
@@ -30,7 +34,7 @@ const Checklist = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (editItem) {
+    if (editItem !== null) {
       const updatedItems = items.map(item => {
         if (item === editItem) {
           return { ...item, text, color, section };
@@ -79,7 +83,7 @@ const Checklist = () => {
 
       {showPlaylist && (
         <div className="playlist-container">
-          <iframe className='playlistt'
+          <iframe
             src="https://open.spotify.com/embed/playlist/7djtxycZOZbOs1Y68FNZJj?utm_source=generator&theme=0"
             width="100%"
             height="160"
@@ -111,7 +115,7 @@ const Checklist = () => {
               ))}
             </select>
           </label>
-          <button className='add-button' type="submit">{editItem ? 'Atualizar' : 'Adicionar Item'}</button>
+          <button className='add-button' type="submit">{editItem !== null ? 'Atualizar' : 'Adicionar Item'}</button>
         </form>
       </div>
 
