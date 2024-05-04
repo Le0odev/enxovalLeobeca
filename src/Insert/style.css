@@ -99,7 +99,8 @@
 
 .item:hover .color-indicator {
   display: block; /* Mostra o indicador de cor no hover */
-  border: 2px red;
+  border: 2px rgb(0, 0, 0);
+  margin-left: 35px;
 }
 
 .color-indicator {

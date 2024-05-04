@@ -32,6 +32,7 @@ const Checklist = () => {
   const [items, setItems] = useState([]);
   const [editItem, setEditItem] = useState(null);
   const [showPlaylist, setShowPlaylist] = useState(false);
+  const [quantItem, setQuantItem] = useState('')
 
   useEffect(() => {
     const itemsRef = database.ref('checklistItems');
@@ -70,7 +71,8 @@ const Checklist = () => {
       database.ref(`checklistItems/${editItem.id}`).update({
         text,
         color,
-        section
+        section,
+        quantity:quantItem
       });
       setEditItem(null);
     } else {
@@ -78,12 +80,14 @@ const Checklist = () => {
         text,
         color,
         section,
+        quantity:quantItem,
         completed: false
       });
     }
     setText('');
     setColor('');
     setSection('');
+    setQuantItem('');
   };
 
   const handleCheckboxChange = (itemToToggle) => {
@@ -103,6 +107,9 @@ const Checklist = () => {
     setSection(itemToEdit.section);
   };
 
+  const handleQuantItem = (e) => {
+    setQuantItem(e.target.value)
+  }
 
   return (
     <div className='checklist-container'>
@@ -135,6 +142,8 @@ const Checklist = () => {
               <option value="">Selecione uma cor</option>
               <option value="#111111">Preto</option>
               <option value="#ffffff">Branco</option>
+              <option value="#808080">Cinza</option>
+              <option value="#ece0c9">Vidro</option>
               <option value="#808080">Inox</option>
             </select>
           </label>
@@ -144,6 +153,9 @@ const Checklist = () => {
                 <option key={index} value={sec}>{sec.charAt(0).toUpperCase() + sec.slice(1)}</option>
               ))}
             </select>
+          </label>
+          <label>
+            <input placeholder='Insira a quantidade' value={quantItem} onChange={handleQuantItem}></input>
           </label>
           <button className='add-button' type="submit">{editItem !== null ? 'Atualizar' : 'Adicionar Item'}</button>
         </form>
@@ -171,6 +183,7 @@ const Checklist = () => {
                         title='Cor selecionada'
                       ></div>
                     )}
+                    <span>l {item.quantity}</span>
                     <FaTrash className='delete-icon' onClick={() => handleDeleteItem(item)} />
                     <FaEdit className='edit-icon' onClick={() => handleEditItem(item)} />
                   </div>
