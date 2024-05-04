@@ -24,7 +24,7 @@ if (!firebase.apps.length) {
 const database = firebase.database(); // Obtém a referência para o Realtime Database
 
 const Checklist = () => {
-  const sections = ['Seções', 'cozinha', 'quarto', 'banheiro', 'escritorio', 'area-de-servico', 'sala', 'viagens/planos', 'pets', "mesa/banho"];
+  const sections = ['Seções', 'cozinha', 'quarto', 'banheiro', 'escritorio', 'area-de-servico', 'sala', 'viagens/planos', 'pets'];
 
   const [text, setText] = useState('');
   const [color, setColor] = useState('');
