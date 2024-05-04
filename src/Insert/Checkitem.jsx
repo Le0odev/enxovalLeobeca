@@ -134,7 +134,7 @@ const Checklist = () => {
             <select value={color} onChange={handleColorChange}>
               <option value="">Selecione uma cor</option>
               <option value="#111111">Preto</option>
-              <option value="#b81414">Vermelho</option>
+              <option value="#ffffff">Branco</option>
               <option value="#808080">Inox</option>
             </select>
           </label>
