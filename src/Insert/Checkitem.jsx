@@ -100,17 +100,42 @@ const Checklist = () => {
     database.ref(`checklistItems/${itemToDelete.id}`).remove();
   };
 
+  const smoothScrollTo = (target, duration) => {
+    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    let startTime = null;
+
+    const animateScroll = (currentTime) => {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const run = ease(timeElapsed, startPosition, distance, duration);
+      window.scrollTo(0, run);
+      if (timeElapsed < duration) requestAnimationFrame(animateScroll);
+    };
+
+    const ease = (t, b, c, d) => {
+      t /= d / 2;
+      if (t < 1) return c / 2 * t * t + b;
+      t--;
+      return -c / 2 * (t * (t - 2) - 1) + b;
+    };
+
+    requestAnimationFrame(animateScroll);
+  };
+
+
   const handleEditItem = (itemToEdit) => {
     setEditItem(itemToEdit);
     setText(itemToEdit.text);
     setColor(itemToEdit.color);
     setSection(itemToEdit.section);
-    setQuantItem(itemToEdit.quantity); // Adicionado para carregar a quantidade do item
+    setQuantItem(itemToEdit.quantity);
 
-    
+    // Scroll suave para a seção de edição
     const editSection = document.getElementById('form-container');
     if (editSection) {
-      editSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      smoothScrollTo(editSection, 2000); // Duracao em milissegundos
     }
   };
 
@@ -190,7 +215,7 @@ const Checklist = () => {
                         title='Cor selecionada'
                       ></div>
                     )}
-                    <span>ll   {item.quantity}</span>
+                    <span> l   {item.quantity}</span>
                     <FaTrash className='delete-icon' onClick={() => handleDeleteItem(item)} />
                     <FaEdit className='edit-icon' onClick={() => handleEditItem(item)} />
                   </div>
