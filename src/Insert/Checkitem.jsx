@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaTrash, FaEdit } from 'react-icons/fa';
-import firebase from 'firebase/compat/app'; // Importe o módulo do Firebase compatível
-import 'firebase/compat/database'; // Importe o módulo do Realtime Database compatívelporte o módulo do Realtime Database
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/database';
 import '../Insert/style.css';
 
 // Configurações do Firebase
@@ -32,7 +32,7 @@ const Checklist = () => {
   const [items, setItems] = useState([]);
   const [editItem, setEditItem] = useState(null);
   const [showPlaylist, setShowPlaylist] = useState(false);
-  const [quantItem, setQuantItem] = useState('')
+  const [quantItem, setQuantItem] = useState('');
 
   useEffect(() => {
     const itemsRef = database.ref('checklistItems');
@@ -72,7 +72,7 @@ const Checklist = () => {
         text,
         color,
         section,
-        quantity:quantItem
+        quantity: quantItem,
       });
       setEditItem(null);
     } else {
@@ -80,8 +80,8 @@ const Checklist = () => {
         text,
         color,
         section,
-        quantity:quantItem,
-        completed: false
+        quantity: quantItem,
+        completed: false,
       });
     }
     setText('');
@@ -92,7 +92,7 @@ const Checklist = () => {
 
   const handleCheckboxChange = (itemToToggle) => {
     database.ref(`checklistItems/${itemToToggle.id}`).update({
-      completed: !itemToToggle.completed
+      completed: !itemToToggle.completed,
     });
   };
 
@@ -105,11 +105,18 @@ const Checklist = () => {
     setText(itemToEdit.text);
     setColor(itemToEdit.color);
     setSection(itemToEdit.section);
+    setQuantItem(itemToEdit.quantity); // Adicionado para carregar a quantidade do item
+
+    
+    const editSection = document.getElementById('form-container');
+    if (editSection) {
+      editSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   const handleQuantItem = (e) => {
-    setQuantItem(e.target.value)
-  }
+    setQuantItem(e.target.value);
+  };
 
   return (
     <div className='checklist-container'>
@@ -132,7 +139,7 @@ const Checklist = () => {
         </div>
       )}
 
-      <div className='form-container'>
+      <div id="form-container" className='form-container'>
         <form onSubmit={handleSubmit}>
           <label>
             <input type="text" placeholder='Insira um item' value={text} onChange={handleTextChange} />
@@ -183,7 +190,7 @@ const Checklist = () => {
                         title='Cor selecionada'
                       ></div>
                     )}
-                    <span>l {item.quantity}</span>
+                    <span>ll   {item.quantity}</span>
                     <FaTrash className='delete-icon' onClick={() => handleDeleteItem(item)} />
                     <FaEdit className='edit-icon' onClick={() => handleEditItem(item)} />
                   </div>
