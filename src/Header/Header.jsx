@@ -20,6 +20,12 @@ export const Header = ({ view, onToggleView }) => {
     }
   };
 
+  // Função para alternar a view e fechar o menu
+  const handleViewChange = (newView) => {
+    onToggleView(newView); // Alterar a view
+    setIsMenuOpen(false); // Fecha o menu após a seleção
+  };
+
   return (
     <section className="section-header m-4 p-4 bg-green-600 rounded-lg shadow-lg flex justify-between items-center">
       <div className="logo flex items-center gap-3">
@@ -47,7 +53,7 @@ export const Header = ({ view, onToggleView }) => {
           {/* Botão de Lista */}
           <button
             className={`flex items-center gap-3 w-full text-lg ${view === 'list' ? 'bg-green-500 text-white' : 'bg-transparent text-gray-800'} py-3 px-4 rounded-lg hover:bg-green-300 transition-all duration-200`}
-            onClick={() => onToggleView('list')}
+            onClick={() => handleViewChange('list')} // Alterar view e fechar o menu
           >
             <FaListCheck className="text-xl" />
             Lista
@@ -56,10 +62,10 @@ export const Header = ({ view, onToggleView }) => {
           {/* Botão de Preço */}
           <button
             className={`flex items-center gap-3 w-full text-lg ${view === 'price' ? 'bg-green-500 text-white' : 'bg-transparent text-gray-800'} py-3 px-4 rounded-lg hover:bg-green-300 transition-all duration-200`}
-            onClick={() => onToggleView('price')}
+            onClick={() => handleViewChange('price')} // Alterar view e fechar o menu
           >
             <TbCurrencyReal className="text-xl" />
-            Preço
+            Preços
           </button>
         </div>
       </div>
@@ -68,13 +74,13 @@ export const Header = ({ view, onToggleView }) => {
       <div className="hidden sm:flex sm:gap-5 sm:items-center sm:w-auto">
         <button
           className={`btn ${view === 'list' ? 'bg-green-500 text-white' : 'bg-transparent text-gray-800'} px-6 py-3 rounded-lg text-lg font-semibold hover:bg-green-300 transition-colors duration-200`}
-          onClick={() => onToggleView('list')}
+          onClick={() => handleViewChange('list')} // Alterar view e fechar o menu
         >
           Lista
         </button>
         <button
           className={`btn ${view === 'price' ? 'bg-green-500 text-white' : 'bg-transparent text-gray-800'} px-6 py-3 rounded-lg text-lg font-semibold hover:bg-green-300 transition-colors duration-200`}
-          onClick={() => onToggleView('price')}
+          onClick={() => handleViewChange('price')} // Alterar view e fechar o menu
         >
           Preço
         </button>
